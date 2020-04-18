@@ -21,15 +21,32 @@ export const BEGIN_POST = 'BEGIN_POST'
 export const POST_SUCCESS = 'POST_SUCCESS'
 export const POST_FAILURE = 'POST_FAILURE'
 
-export const addSmurf = newSmurf => dispatch => {
+export const addSmurf = smurf => dispatch => {
     dispatch ({type: BEGIN_POST})
-    axios.post('http://localhost:3333/smurfs', newSmurf)
+    axios.post('http://localhost:3333/smurfs', smurf)
         .then(res => dispatch ({
             type: POST_SUCCESS,
             payload: res.data
         }))
         .catch(err => dispatch({
             type: POST_FAILURE,
+            payload: err
+        }))
+}
+
+export const BEGIN_DELETE = 'BEGIN_DELETE'
+export const DELETE_SUCCESS = 'DELETE_SUCCESS'
+export const DELETE_FAILURE = 'DELETE_FAILURE'
+
+export const deleteSmurf = smurfId => dispatch => {
+    dispatch ({type: BEGIN_DELETE})
+    axios.delete(`http://localhost:3333/smurfs/${smurfId}`)
+        .then(res => dispatch ({
+            type: DELETE_SUCCESS,
+            payload: res.data
+        }))
+        .catch(err => dispatch({
+            type: DELETE_FAILURE,
             payload: err
         }))
 }

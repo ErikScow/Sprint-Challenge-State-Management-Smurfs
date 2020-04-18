@@ -4,7 +4,10 @@ import {
     FETCH_FAILURE,
     BEGIN_POST,
     POST_SUCCESS,
-    POST_FAILURE
+    POST_FAILURE,
+    BEGIN_DELETE,
+    DELETE_SUCCESS,
+    DELETE_FAILURE
 } from '../actions/actions'
 
 const initialState = {
@@ -51,6 +54,27 @@ const reducer = (state = initialState, action) => {
                 error: ''
             }
         case POST_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload,
+            }
+
+        //delete request cases
+        case BEGIN_DELETE:
+            return {
+                ...state,
+                isFetching: true,
+                error: ''
+            }
+        case DELETE_SUCCESS:
+            return {
+                ...state,
+                smurfs: action.payload,
+                isFetching: false,
+                error: ''
+            }
+        case DELETE_FAILURE:
             return {
                 ...state,
                 isFetching: false,
