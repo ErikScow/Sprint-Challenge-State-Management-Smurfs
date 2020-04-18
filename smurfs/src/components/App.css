@@ -1,3 +1,9 @@
+body{
+  background: rgba(120,150,255,1);
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
