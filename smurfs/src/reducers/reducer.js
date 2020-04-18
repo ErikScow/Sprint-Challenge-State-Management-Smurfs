@@ -1,7 +1,10 @@
 import {
     BEGIN_FETCH,
     FETCH_SUCCESS,
-    FETCH_FAILURE
+    FETCH_FAILURE,
+    BEGIN_POST,
+    POST_SUCCESS,
+    POST_FAILURE
 } from '../actions/actions'
 
 const initialState = {
@@ -12,6 +15,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
+        //get request cases
         case BEGIN_FETCH:
             return {
                 ...state,
@@ -26,6 +30,27 @@ const reducer = (state = initialState, action) => {
                 error: ''
             }
         case FETCH_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload,
+            }
+
+        //post request cases
+        case BEGIN_POST:
+            return {
+                ...state,
+                isFetching: true,
+                error: ''
+            }
+        case POST_SUCCESS:
+            return {
+                ...state,
+                smurfs: action.payload,
+                isFetching: false,
+                error: ''
+            }
+        case POST_FAILURE:
             return {
                 ...state,
                 isFetching: false,
